@@ -10,6 +10,7 @@ import SwiftUI
 struct CartView: View {
     
     @ObservedObject var shirtsViewModel: ShirtsViewModel
+    @Binding var selectedTab: Int
     
     var body: some View {
         NavigationStack {
@@ -46,7 +47,10 @@ struct CartView: View {
             .navigationTitle("Cart")
             .safeAreaInset(edge: .bottom) {
                 NavigationLink {
-                    UserInfoView(shirtsViewModel: shirtsViewModel)
+                    UserInfoView(
+                        shirtsViewModel: shirtsViewModel,
+                        selectedTab: $selectedTab
+                    )
                 } label: {
                     Text("Buy")
                         .frame(maxWidth: .infinity)

@@ -13,6 +13,10 @@ class ShirtsViewModel: ObservableObject {
     @Published var shirts: [Shirt] = shirtList
     @Published var cart: [Shirt] = []
     
+    var totalPrice: Double {
+        cart.reduce(0) { $0 + $1.price }
+    }
+    
     // MARK: CART FUNCS
     func addToCart(shirt: Shirt) {
         cart.append(shirt)

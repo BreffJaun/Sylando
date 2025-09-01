@@ -12,24 +12,51 @@ struct UserInfoView: View {
     @ObservedObject var shirtsViewModel: ShirtsViewModel
     @StateObject var userViewModel = UserInfoViewModel()
     
+    @Binding var selectedTab: Int
+    
     var body: some View {
-        Form {
-            Section(header: Text("Personal Details")) {
-                TextField("Company Name", text: $userViewModel.userInfo.companyName)
-                TextField("Street", text: $userViewModel.userInfo.street)
-                TextField("City", text: $userViewModel.userInfo.city)
-            }
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.65, green: 0.85, blue: 1.0),
+                    Color(red: 0.45, green: 0.75, blue: 0.95),
+                    Color(red: 0.60, green: 0.55, blue: 0.90)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
             
-            Section {
-                NavigationLink {
-                    Text("Next View comes laaaater....")
-                } label: {
-                    Text("Next")
-                        .foregroundColor(userViewModel.isValid ? .primary : .gray)
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea()
+            Form {
+                Section {
+                    TextField("Company Name", text: $userViewModel.userInfo.companyName)
+                    TextField("Street", text: $userViewModel.userInfo.street)
+                    TextField("City", text: $userViewModel.userInfo.city)
+                } header: {
+                    Text("Personal Details")
                 }
-                .disabled(!userViewModel.isValid)
+                
+                Section {
+                    NavigationLink {
+                        CheckoutSummaryView(
+                            shirtsViewModel: shirtsViewModel,
+                            userViewModel: userViewModel,
+                            selectedTab: $selectedTab
+                        )
+                    } label: {
+                        Text("Next")
+                            .foregroundStyle(userViewModel.isValid ? .primary : Color.gray)
+                    }
+                    .disabled(!userViewModel.isValid)
+                }
             }
+            .scrollContentBackground(.hidden)
+            .background(.clear)
+            .navigationTitle("Checkout")
+            .navigationBarTitleDisplayMode(.large)
         }
-        .navigationTitle("Check-Out")
     }
 }

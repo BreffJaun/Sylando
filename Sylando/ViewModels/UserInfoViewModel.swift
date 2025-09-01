@@ -16,4 +16,8 @@ class UserInfoViewModel: ObservableObject {
         !userInfo.street.isEmpty &&
         !userInfo.city.isEmpty
     }
+    
+    func reset() {
+        userInfo = UserInfo(companyName: "", street: "", city: "")
+    }
 }
