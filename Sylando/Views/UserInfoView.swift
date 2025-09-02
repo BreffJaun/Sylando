@@ -9,10 +9,11 @@ import SwiftUI
 
 struct UserInfoView: View {
     
-    @ObservedObject var shirtsViewModel: ShirtsViewModel
-    @StateObject var userViewModel = UserInfoViewModel()
+    //    @EnvironmentObject var shirtsViewModel: ShirtsViewModel
+    @EnvironmentObject var userViewModel: UserInfoViewModel
     
     @Binding var selectedTab: Int
+    @Binding var path: NavigationPath
     
     var body: some View {
         ZStack {
@@ -32,7 +33,7 @@ struct UserInfoView: View {
                 .ignoresSafeArea()
             Form {
                 Section {
-                    TextField("Company Name", text: $userViewModel.userInfo.companyName)
+                    TextField("Name", text: $userViewModel.userInfo.name)
                     TextField("Street", text: $userViewModel.userInfo.street)
                     TextField("City", text: $userViewModel.userInfo.city)
                 } header: {
@@ -40,12 +41,17 @@ struct UserInfoView: View {
                 }
                 
                 Section {
-                    NavigationLink {
-                        CheckoutSummaryView(
-                            shirtsViewModel: shirtsViewModel,
-                            userViewModel: userViewModel,
-                            selectedTab: $selectedTab
-                        )
+                    //                    NavigationLink {
+                    //                        CheckoutSummaryView(selectedTab: $selectedTab)
+                    //                            .environmentObject(userViewModel)
+                    //
+                    //                    } label: {
+                    //                        Text("Next")
+                    //                            .foregroundStyle(userViewModel.isValid ? .primary : Color.gray)
+                    //                    }
+                    //                    .disabled(!userViewModel.isValid)
+                    Button {
+                        path.append(CartRoute.summary)
                     } label: {
                         Text("Next")
                             .foregroundStyle(userViewModel.isValid ? .primary : Color.gray)

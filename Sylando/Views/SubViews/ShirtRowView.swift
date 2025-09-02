@@ -26,7 +26,7 @@ struct ShirtRowView: View {
                     .font(.headline)
             }
             HStack {
-                Text("Size: \(shirt.size)")
+                Text("Size: \(shirt.size.title)")
                     .foregroundStyle(.secondary)
                     .font(.subheadline)
             }

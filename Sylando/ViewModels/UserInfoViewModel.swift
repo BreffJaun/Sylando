@@ -9,15 +9,15 @@ import Foundation
 
 class UserInfoViewModel: ObservableObject {
     
-    @Published var userInfo = UserInfo(companyName: "", street: "", city: "")
+    @Published var userInfo = UserInfo(name: "", street: "", city: "")
     
     var isValid: Bool {
-        !userInfo.companyName.isEmpty &&
+        !userInfo.name.isEmpty &&
         !userInfo.street.isEmpty &&
         !userInfo.city.isEmpty
     }
     
     func reset() {
-        userInfo = UserInfo(companyName: "", street: "", city: "")
+        userInfo = UserInfo(name: "", street: "", city: "")
     }
 }

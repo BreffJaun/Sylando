@@ -9,11 +9,14 @@ import SwiftUI
 
 struct CartView: View {
     
-    @ObservedObject var shirtsViewModel: ShirtsViewModel
+    @EnvironmentObject var shirtsViewModel: ShirtsViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
+    
     @Binding var selectedTab: Int
     
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $cartViewModel.path) {
             ZStack {
                 LinearGradient(
                     gradient: Gradient(colors: [
@@ -31,11 +34,11 @@ struct CartView: View {
                     .ignoresSafeArea()
                 
                 List {
-                    ForEach(shirtsViewModel.cart) { shirt in
+                    ForEach(cartViewModel.cartItems) { shirt in
                         ShirtRowView(
                             shirt: shirt,
                             onAddToCart: nil,
-                            onDelete: { shirtsViewModel.removeFromCart(shirt) },
+                            onDelete: { cartViewModel.removeFromCart(shirt) },
                             deleteIcon: "cart.badge.minus"
                         )
                     }
@@ -46,11 +49,8 @@ struct CartView: View {
             }
             .navigationTitle("Cart")
             .safeAreaInset(edge: .bottom) {
-                NavigationLink {
-                    UserInfoView(
-                        shirtsViewModel: shirtsViewModel,
-                        selectedTab: $selectedTab
-                    )
+                Button { // anstatt des vorhrigen NavigationLinks
+                    cartViewModel.path.append(CartRoute.userInfo)
                 } label: {
                     Text("Buy")
                         .frame(maxWidth: .infinity)
@@ -63,7 +63,16 @@ struct CartView: View {
                         .padding(.vertical)
                 }
                 .background(.ultraThinMaterial)
-                .disabled(shirtsViewModel.cart.isEmpty)
+                .disabled(cartViewModel.cartItems.isEmpty)
+            }
+            .navigationDestination(for: CartRoute.self) { route in
+                switch route {
+                case .userInfo:
+                    UserInfoView(selectedTab: $selectedTab, path: $cartViewModel.path)
+                    
+                case .summary:
+                    CheckoutSummaryView(selectedTab: $selectedTab, path: $cartViewModel.path)
+                }
             }
         }
     }

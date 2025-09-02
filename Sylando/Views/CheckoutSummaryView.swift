@@ -9,14 +9,17 @@ import SwiftUI
 
 struct CheckoutSummaryView: View {
     
-    @ObservedObject var shirtsViewModel: ShirtsViewModel
-    @ObservedObject var userViewModel: UserInfoViewModel
+    @EnvironmentObject var shirtsViewModel: ShirtsViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
+    @EnvironmentObject var userViewModel: UserInfoViewModel
+    
     @Binding var selectedTab: Int
+    @Binding var path: NavigationPath
     
     @State private var showConfirmation = false
     
     private var totalText: String {
-        shirtsViewModel.totalPrice.formatted(.currency(code: "EUR"))
+        cartViewModel.totalPrice.formatted(.currency(code: "EUR"))
     }
     
     var body: some View {
@@ -38,18 +41,18 @@ struct CheckoutSummaryView: View {
             
             List {
                 Section {
-                    ForEach(shirtsViewModel.cart) { shirt in
+                    ForEach(cartViewModel.cartItems) { shirt in
                         HStack {
                             Text(shirt.title)
                             Spacer()
-                            Text(shirt.size)
+                            Text(shirt.size.title)
                                 .foregroundStyle(.secondary)
                         }
                     }
                 }
                 
                 Section {
-                    Text(userViewModel.userInfo.companyName)
+                    Text(userViewModel.userInfo.name)
                     Text(userViewModel.userInfo.street)
                     Text(userViewModel.userInfo.city)
                 } header: {
@@ -68,13 +71,20 @@ struct CheckoutSummaryView: View {
                 Section {
                     Button {
                         showConfirmation = true
-                        shirtsViewModel.clearCart()
+                        cartViewModel.clearCart()
                         userViewModel.reset()
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             showConfirmation = false
                             selectedTab = 0
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                cartViewModel.path = NavigationPath()
+                            }
+                            
                         }
+                       
+//                        confirmPurchase()
                     } label: {
                         Text("Buy now!")
                             .foregroundStyle(.tint)
@@ -95,4 +105,15 @@ struct CheckoutSummaryView: View {
         .navigationTitle("Summary")
         .navigationBarTitleDisplayMode(.large)
     }
+    
+//    private func confirmPurchase() {
+//        showConfirmation = true
+//        cartViewModel.completePurchase(userViewModel: userViewModel)
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            showConfirmation = false
+//            path = NavigationPath()
+//            selectedTab = 0
+//        }
+//    }
 }

@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ShirtListView: View {
     
-    @ObservedObject var shirtsViewModel: ShirtsViewModel
+    @EnvironmentObject var shirtsViewModel: ShirtsViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
+    
     @State private var shirtToDelete: Shirt?
     @State private var showDeleteAlert = false
     @State private var showAddShirtSheet = false
@@ -37,7 +39,7 @@ struct ShirtListView: View {
                         ForEach(shirtsViewModel.shirts) { shirt in
                             ShirtRowView(
                                 shirt: shirt,
-                                onAddToCart: { shirtsViewModel.addToCart(shirt: shirt) },
+                                onAddToCart: { cartViewModel.addToCart(shirt) },
                                 onDelete: {
                                     shirtToDelete = shirt
                                     showDeleteAlert = true
@@ -72,8 +74,9 @@ struct ShirtListView: View {
                     Text("Do you really want to remove this shirt?")
                 }
                 .sheet(isPresented: $showAddShirtSheet) {
-                    Text("Your AddShirtView could be located here")
-                        .font(.title)
+                    NavigationStack {
+                        ShirtAddView(showAddShirtSheet: $showAddShirtSheet)
+                    }
                 }
             }
         }

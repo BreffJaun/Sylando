@@ -7,12 +7,20 @@
 
 import SwiftUI
 
-import SwiftUI
-
 @MainActor
 class CartViewModel: ObservableObject {
     
-    @Published var cartItems: [Shirt] = []
+    @Published var path = NavigationPath()
+    
+    @Published var cartItems: [Shirt] = [
+        Shirt(title: "Grey Henley Shirt", price: 27.49, size: .m),
+        Shirt(title: "Yellow Summer Tee", price: 20.99, size: .l),
+        Shirt(title: "Navy Blue Long Sleeve", price: 32.99, size: .m)
+    ]
+    
+    var totalPrice: Double {
+        cartItems.reduce(0) { $0 + $1.price }
+    }
     
     func addToCart(_ shirt: Shirt) {
         cartItems.append(shirt)
@@ -25,4 +33,9 @@ class CartViewModel: ObservableObject {
     func clearCart() {
         cartItems = []
     }
+    
+//    func completePurchase(userViewModel: UserInfoViewModel) {
+//        clearCart()
+//        userViewModel.reset()
+//    }
 }

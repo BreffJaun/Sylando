@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserInfo {
-    var companyName: String
+    var name: String
     var street: String
     var city: String
 }

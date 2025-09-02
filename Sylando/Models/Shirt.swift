@@ -11,6 +11,6 @@ struct Shirt: Identifiable {
     let id: UUID = UUID()
     var title: String
     var price: Double
-    var size: String
+    var size: Size
 }
 

@@ -11,31 +11,13 @@ import SwiftUI
 class ShirtsViewModel: ObservableObject {
     
     @Published var shirts: [Shirt] = shirtList
-    @Published var cart: [Shirt] = []
+//    @Published var cart: [Shirt] = []
     
-    var totalPrice: Double {
-        cart.reduce(0) { $0 + $1.price }
-    }
-    
-    // MARK: CART FUNCS
-    func addToCart(shirt: Shirt) {
-        cart.append(shirt)
-    }
-    
-    func clearCart() {
-        cart = []
-    }
-    
-    func removeFromCart(_ shirt: Shirt) {
-        cart.removeAll { $0.id == shirt.id }
-    }
-    
-    // MARK: STOCK FUNCS
     func deleteShirt(shirt: Shirt) {
         shirts.removeAll { $0.id == shirt.id }
     }
     
-    func addShirt(title: String, price: Double, size: String) {
+    func addShirt(title: String, price: Double, size: Size) {
         let newShirt = Shirt(title: title, price: price, size: size)
         shirts.append(newShirt)
     }
