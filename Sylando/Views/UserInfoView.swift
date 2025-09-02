@@ -41,15 +41,6 @@ struct UserInfoView: View {
                 }
                 
                 Section {
-                    //                    NavigationLink {
-                    //                        CheckoutSummaryView(selectedTab: $selectedTab)
-                    //                            .environmentObject(userViewModel)
-                    //
-                    //                    } label: {
-                    //                        Text("Next")
-                    //                            .foregroundStyle(userViewModel.isValid ? .primary : Color.gray)
-                    //                    }
-                    //                    .disabled(!userViewModel.isValid)
                     Button {
                         path.append(CartRoute.summary)
                     } label: {

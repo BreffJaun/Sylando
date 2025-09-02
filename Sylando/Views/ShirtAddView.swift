@@ -116,11 +116,3 @@ struct ShirtAddView: View {
 //#Preview {
 //    ShirtAddView()
 //}
-
-
-//TextField("Enter amount", value: $amount, format: .number)
-//    .keyboardType(.decimalPad)
-//    .environment(\.locale, Locale(identifier: "en_US"))
-
-//let normalized = inputText.replacingOccurrences(of: ",", with: ".")
-//let value = Double(normalized)

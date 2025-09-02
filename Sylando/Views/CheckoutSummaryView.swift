@@ -70,23 +70,12 @@ struct CheckoutSummaryView: View {
                 
                 Section {
                     Button {
-                        showConfirmation = true
-                        cartViewModel.clearCart()
-                        userViewModel.reset()
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            showConfirmation = false
-                            selectedTab = 0
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                cartViewModel.path = NavigationPath()
-                            }
-                            
-                        }
-                       
-//                        confirmPurchase()
+                        confirmPurchase()
                     } label: {
                         Text("Buy now!")
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                             .foregroundStyle(.tint)
                     }
                 }
@@ -106,14 +95,18 @@ struct CheckoutSummaryView: View {
         .navigationBarTitleDisplayMode(.large)
     }
     
-//    private func confirmPurchase() {
-//        showConfirmation = true
-//        cartViewModel.completePurchase(userViewModel: userViewModel)
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            showConfirmation = false
-//            path = NavigationPath()
-//            selectedTab = 0
-//        }
-//    }
+        private func confirmPurchase() {
+            showConfirmation = true
+            cartViewModel.completePurchase(userViewModel: userViewModel)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                showConfirmation = false
+                selectedTab = 0
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    cartViewModel.path = NavigationPath() // Navigation reset
+                }
+            }
+        }
+    // => confirmPurchase() soll in der View bleiben, weil es UI-Flow ist. Nur completePurchase() bleibt im ViewModel.
 }
