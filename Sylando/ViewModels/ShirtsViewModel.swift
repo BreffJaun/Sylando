@@ -10,8 +10,12 @@ import SwiftUI
 @MainActor
 class ShirtsViewModel: ObservableObject {
     
+    @Published var httpError: HTTPError?
     @Published var shirts: [Shirt] = shirtList
-//    @Published var cart: [Shirt] = []
+    @Published var quote: Quote?
+    
+    private let quotesRepository = QuoteRepository()
+    
     
     func deleteShirt(shirt: Shirt) {
         shirts.removeAll { $0.id == shirt.id }
@@ -21,6 +25,22 @@ class ShirtsViewModel: ObservableObject {
         let newShirt = Shirt(title: title, price: price, size: size)
         shirts.append(newShirt)
     }
+    
+    func executeFetchQuote() {
+        Task {
+            do {
+                quote = try await quotesRepository.fetchQuoteFromAPI()
+                httpError = nil
+            } catch let httpError as HTTPError {
+                print("HTTPError while fetching quote: \(httpError.localizedDescription)")
+                self.httpError = httpError
+            } catch {
+                print("Unknown error while fetching quote: \(error.localizedDescription)")
+                self.httpError = .unknown(error)
+            }
+        }
+    }
+    
 }
 
 

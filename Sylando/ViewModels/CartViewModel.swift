@@ -11,7 +11,6 @@ import SwiftUI
 class CartViewModel: ObservableObject {
     
     @Published var path = NavigationPath()
-    
     @Published var cartItems: [Shirt] = [
         Shirt(title: "Grey Henley Shirt", price: 27.49, size: .m),
         Shirt(title: "Yellow Summer Tee", price: 20.99, size: .l),
@@ -39,10 +38,10 @@ class CartViewModel: ObservableObject {
         userViewModel.reset()
     }
     
-    func finalizePurchase(userViewModel: UserInfoViewModel, selectedTab: inout Int) {
-        clearCart()
-        userViewModel.reset()
-        selectedTab = 0
-        path = NavigationPath()
-    }
+//    func finalizePurchase(userViewModel: UserInfoViewModel, selectedTab: inout Int) {
+//        clearCart()
+//        userViewModel.reset()
+//        selectedTab = 0
+//        path = NavigationPath()
+//    }
 }

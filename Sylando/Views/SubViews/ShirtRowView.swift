@@ -45,8 +45,9 @@ struct ShirtRowView: View {
             if let onAddToCart {
                 Button {
                     onAddToCart()
-                    let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.success)
+//                    let generator = UINotificationFeedbackGenerator()
+//                    generator.notificationOccurred(.success)
+                    // for haptical feedback, a small vibration
                 } label: {
                     Label("Add to Cart", systemImage: "cart.badge.plus")
                 }

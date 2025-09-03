@@ -34,7 +34,7 @@ struct ShirtAddView: View {
             Form {
                 Section {
                     Button {
-                        shirtAddViewModel.loadRandomQuote()
+                        shirtsViewModel.executeFetchQuote()
                     } label: {
                         VStack(spacing: 12) {
                             ZStack {
@@ -42,20 +42,35 @@ struct ShirtAddView: View {
                                     .font(.system(size: 200))
                                     .foregroundColor(.purple.opacity(0.8))
                                 
-                                if let quote = shirtAddViewModel.randomQuote {
-                                    Text(quote)
+                                if let quote = shirtsViewModel.quote {
+                                    Text(quote.text)
                                         .font(.headline)
                                         .foregroundColor(.yellow)
                                         .padding()
                                         .multilineTextAlignment(.center)
-                                        .frame(maxWidth: 150)
+                                        .frame(maxWidth: 150, maxHeight: 150)
                                         .minimumScaleFactor(0.7)
-                                    //                                            .border(.red)
+//                                        .border(.red)
                                 }
+//                                if let quote = shirtsViewModel.quote {
+//                                    ZStack {
+//                                        Image(systemName: "tshirt.fill")
+//                                            .font(.system(size: 200))
+//                                            .fontWeight(.ultraLight)
+//                                            .foregroundStyle(.blue)
+//                                        
+//                                        Text(quote.text)
+//                                            .font(.caption)
+//                                            .fontWeight(.bold)
+//                                            .frame(width: 110)
+//                                            .foregroundStyle(.white)
+//                                            .multilineTextAlignment(.center)
+//                                    }
+//                                    .frame(maxWidth: .infinity)
+//                                }
                             }
                             .frame(maxWidth: .infinity, minHeight: 250)
                             
-                            // Untertitel mit kleinem Shirt + Text
                             HStack(spacing: 8) {
                                 Image(systemName: "tshirt.fill")
                                     .foregroundColor(.purple)
