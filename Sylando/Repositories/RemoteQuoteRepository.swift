@@ -7,9 +7,9 @@
 
 import Foundation
 
-class QuoteRepository {
-    
-    func fetchQuoteFromAPI() async throws -> Quote {
+class RemoteQuoteRepository: QuoteRepository {
+
+    func getQuotes() async throws -> Quote {
         let quotes: [Quote] = try await NetworkService.sendData(
             to: URLs.base + URLs.quotes,
             responseType: [Quote].self
@@ -20,4 +20,3 @@ class QuoteRepository {
         return randomQuote
     }
 }
-

@@ -7,9 +7,9 @@
 
 import Foundation
 
-let quotes = [
-    "Stay hungry, stay foolish.",
-    "Code is like humor. When you have to explain it, it’s bad.",
-    "Simplicity is the soul of efficiency.",
-    "Eat, Sleep, Code, Repeat."
+let quotes: [Quote] = [
+    Quote(id: UUID().uuidString, author: "Steve Jobs", text: "Stay hungry, stay foolish."),
+    Quote(id: UUID().uuidString, author: "Anonymous", text: "Code is like humor. When you have to explain it, it’s bad."),
+    Quote(id: UUID().uuidString, author: "Austin Freeman", text: "Simplicity is the soul of efficiency."),
+    Quote(id: UUID().uuidString, author: "Anonymous", text: "Eat, Sleep, Code, Repeat.")
 ]

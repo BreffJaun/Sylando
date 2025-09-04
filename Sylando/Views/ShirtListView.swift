@@ -67,6 +67,7 @@ struct ShirtListView: View {
                     Button("Delete", role: .destructive) {
                         if let shirt = shirtToDelete {
                             shirtsViewModel.deleteShirt(shirt: shirt)
+                            cartViewModel.removeFromCart(shirt)
                         }
                     }
                     Button("Cancel", role: .cancel) { }
@@ -83,6 +84,6 @@ struct ShirtListView: View {
     }
 }
 
-//#Preview {
-//    ShirtListView()
-//}
+#Preview {
+    ShirtListView()
+}

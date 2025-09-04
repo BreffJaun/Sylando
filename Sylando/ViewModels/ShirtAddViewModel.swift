@@ -22,7 +22,7 @@ class ShirtAddViewModel: ObservableObject {
     }
     
     func loadRandomQuote() {
-        randomQuote = quotes.randomElement()
+        randomQuote = quotes.randomElement()?.text
     }
     
     func parsePrice() -> Double? {

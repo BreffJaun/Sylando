@@ -11,11 +11,19 @@ import UIKit
 
 struct NavigatorView: View {
     
-    @StateObject private var shirtsViewModel = ShirtsViewModel()
     @StateObject private var cartViewModel = CartViewModel()
+    @StateObject private var shirtsViewModel: ShirtsViewModel
     @StateObject private var userViewModel = UserInfoViewModel()
     
     @State private var selectedTab = 0
+    
+    init(useLocalRepsitory: Bool) {
+        if useLocalRepsitory {
+            _shirtsViewModel = StateObject(wrappedValue: ShirtsViewModel(repository: LocalQuoteRepository()))
+        } else {
+            _shirtsViewModel = StateObject(wrappedValue: ShirtsViewModel(repository: RemoteQuoteRepository()))
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -40,5 +48,6 @@ struct NavigatorView: View {
 }
 
 #Preview {
-    NavigatorView()
+    NavigatorView(useLocalRepsitory: true)
 }
+

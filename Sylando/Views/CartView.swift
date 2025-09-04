@@ -32,7 +32,14 @@ struct CartView: View {
                 Rectangle()
                     .fill(.ultraThinMaterial)
                     .ignoresSafeArea()
-                
+                if cartViewModel.cartItems.isEmpty {
+                    ContentUnavailableView {
+                        Label("Cart is empty", systemImage: "cart")
+                    } description: {
+                        Text("Add items to your cart to be...happy 😎")
+                    }
+                    .padding(.top, 50)
+                }
                 List {
                     ForEach(cartViewModel.cartItems) { shirt in
                         ShirtRowView(
