@@ -51,3 +51,4 @@ struct NavigatorView: View {
     NavigatorView(useLocalRepsitory: true)
 }
 
+
