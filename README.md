@@ -1,5 +1,10 @@
 # Sylando
 
+![Swift](https://img.shields.io/badge/Swift-5-orange?logo=swift&logoColor=white)
+![Xcode](https://img.shields.io/badge/Xcode-16.4-blue?logo=xcode&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-18.0-black?logo=apple&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
+
 <img src="Sylando/Images/Sylando.png" width="75%">
 
 **Sylando** is a SwiftUI-based shopping app where you can browse cool T-Shirts, customize them with inspirational quotes, and manage your cart. From adding shirts to completing purchases, Sylando provides a clean and modern shopping experience. 🛍👕✨
