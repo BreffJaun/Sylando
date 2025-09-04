@@ -1,6 +1,6 @@
 # Sylando
 
-<img src="Sylando/Images/SylandoAppIcon.png" width="75%">
+<img src="Sylando/Images/Sylando.png" width="75%">
 
 **Sylando** is a SwiftUI-based shopping app where you can browse cool T-Shirts, customize them with inspirational quotes, and manage your cart. From adding shirts to completing purchases, Sylando provides a clean and modern shopping experience. 🛍👕✨
 
