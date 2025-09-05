@@ -37,11 +37,4 @@ class CartViewModel: ObservableObject {
         clearCart()
         userViewModel.reset()
     }
-    
-//    func finalizePurchase(userViewModel: UserInfoViewModel, selectedTab: inout Int) {
-//        clearCart()
-//        userViewModel.reset()
-//        selectedTab = 0
-//        path = NavigationPath()
-//    }
 }

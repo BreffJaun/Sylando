@@ -9,7 +9,6 @@ import SwiftUI
 
 struct UserInfoView: View {
     
-    //    @EnvironmentObject var shirtsViewModel: ShirtsViewModel
     @EnvironmentObject var userViewModel: UserInfoViewModel
     
     @Binding var selectedTab: Int
@@ -45,6 +44,8 @@ struct UserInfoView: View {
                         path.append(CartRoute.summary)
                     } label: {
                         Text("Next")
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
                             .foregroundStyle(userViewModel.isValid ? .primary : Color.gray)
                     }
                     .disabled(!userViewModel.isValid)
